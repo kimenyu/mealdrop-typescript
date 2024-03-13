@@ -11,6 +11,8 @@ const customerSchema = new mongoose_1.Schema({
     role: { type: String, required: true, default: 'customer' },
     location: { type: String },
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
 });
 exports.default = (0, mongoose_1.model)('Customer', customerSchema);
 //# sourceMappingURL=customer.js.map

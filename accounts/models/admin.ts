@@ -10,6 +10,8 @@ export interface Admin extends Document {
     role: string;
     location: string;
     phoneNum: string;
+    isVerified: boolean;
+    verificationCode?: string; 
     createdAt: Date;
 }
 
@@ -22,6 +24,8 @@ const adminSchema: Schema<Admin> = new Schema({
     role: { type: String, required: true, default: 'admin'},
     location: { type: String },
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
 });
 
 export default model<Admin>('Admin', adminSchema);

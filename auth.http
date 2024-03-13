@@ -1,0 +1,26 @@
+# POST http://localhost:3000/api/delivery-agent/register
+# Content-Type: application/json
+
+# {
+#   "username": "kimenu",
+#   "email": "njorogekimenyu@gmail.com",
+#   "password": "example_password",
+#   "phoneNum": "+254712343678"
+# }
+
+# POST http://localhost:3000/api/delivery-agent/verify
+# Content-Type: application/json
+
+# {
+#   "email": "njorogekimenyu@gmail.com",
+#   "verificationCode": "91049"
+# }
+
+
+# POST http://localhost:3000/api/delivery-agent/register
+# Content-Type: application/json
+
+# {
+#   "username": "kimenyu",
+#   "password": "example_password"
+# }

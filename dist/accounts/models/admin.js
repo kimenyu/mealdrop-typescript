@@ -11,6 +11,8 @@ const adminSchema = new mongoose_1.Schema({
     role: { type: String, required: true, default: 'admin' },
     location: { type: String },
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
 });
 exports.default = (0, mongoose_1.model)('Admin', adminSchema);
 //# sourceMappingURL=admin.js.map

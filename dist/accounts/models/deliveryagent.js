@@ -10,6 +10,8 @@ const deliveryAgentSchema = new mongoose_1.Schema({
     password: { type: String, required: true },
     role: { type: String, required: true, default: 'delieveryAgent' },
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
 });
 exports.default = (0, mongoose_1.model)('DeliveryAgent', deliveryAgentSchema);
 //# sourceMappingURL=deliveryagent.js.map

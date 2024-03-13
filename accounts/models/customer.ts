@@ -10,7 +10,9 @@ export interface Customer extends Document {
     role: string;
     location: string;
     phoneNum: string;
+    isVerified: boolean;
     createdAt: Date;
+    verificationCode?: string; 
 }
 
 const customerSchema: Schema<Customer> = new Schema({
@@ -23,6 +25,9 @@ const customerSchema: Schema<Customer> = new Schema({
     role: { type: String, required: true, default: 'customer'},
     location: { type: String },
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
+
 });
 
 export default model<Customer>('Customer', customerSchema);

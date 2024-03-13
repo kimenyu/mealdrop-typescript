@@ -10,6 +10,9 @@ export interface DeliveryAgent extends Document {
     role: string;
     phoneNum: string;
     createdAt: Date;
+    isVerified: boolean;
+    verificationCode?: string; 
+
 }
 
 const deliveryAgentSchema: Schema<DeliveryAgent> = new Schema({
@@ -20,6 +23,8 @@ const deliveryAgentSchema: Schema<DeliveryAgent> = new Schema({
     password: { type: String, required: true },
     role: { type: String, required: true, default: 'delieveryAgent'},
     phoneNum: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCode: { type: String },
 });
 
 export default model<DeliveryAgent>('DeliveryAgent', deliveryAgentSchema);
