@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const customerAccountsRoutes_1 = require("../accounts/routes/customerAccountsRoutes");
+const mealdropRoutes_1 = require("../routes/mealdropRoutes");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -33,5 +33,5 @@ try {
 catch (error) {
     console.log(error);
 }
-app.use("/api/accounts", customerAccountsRoutes_1.router);
+app.use("/api", mealdropRoutes_1.router);
 //# sourceMappingURL=app.js.map

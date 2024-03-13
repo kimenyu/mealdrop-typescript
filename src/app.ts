@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import mongoose, { ConnectOptions } from "mongoose";
-import { router } from "../accounts/routes/customerAccountsRoutes";
+import { router } from "../routes/mealdropRoutes";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -37,4 +37,4 @@ try {
   console.log(error);
 }
 
-app.use("/api/accounts", router);
+app.use("/api", router);
