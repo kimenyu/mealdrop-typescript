@@ -114,6 +114,22 @@ const verifyEmailAdmin = (req, res) => __awaiter(void 0, void 0, void 0, functio
         // Update customer verification status
         admin.isVerified = true;
         yield admin.save();
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: 'Account Verification Successful',
+            text: 'Congratulations! Your account has been successfully verified.'
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                // Handle email sending error
+            }
+            else {
+                console.log('Verification email sent: ' + info.response);
+                // Handle email sending success
+            }
+        });
         return res.status(200).json({ message: "Verification successful" });
     }
     catch (error) {
