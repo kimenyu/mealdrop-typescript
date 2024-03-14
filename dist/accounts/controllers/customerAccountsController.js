@@ -165,4 +165,24 @@ const loginCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.loginCustomer = loginCustomer;
+// Reset Password
+// app.post('/password/reset', async (req: Request, res: Response) => {
+//     const { token, newPassword } = req.body;
+//     try {
+//         // Find the customer by reset token
+//         const customer = await Customer.findOne({ resetToken: token });
+//         if (!customer) {
+//             return res.status(404).json({ message: "Invalid or expired token" });
+//         }
+//         // Update password
+//         const hashedPassword = await bcrypt.hash(newPassword, 10);
+//         customer.password = hashedPassword;
+//         customer.resetToken = undefined;
+//         await customer.save();
+//         return res.status(200).json({ message: "Password reset successful" });
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ message: "Internal server error" });
+//     }
+// });
 //# sourceMappingURL=customerAccountsController.js.map

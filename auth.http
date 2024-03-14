@@ -1,27 +1,52 @@
 
-# POST http://localhost:3000/api/customer/register
+# POST http://localhost:3000/api/admin/register
+# Content-Type: application/json
+
+# {
+#   "username": "kim",
+#   "email": "kimenyujoseph@gmail.com",
+#   "password": "example_password",
+#   "phoneNum": "+254712343673"
+# }
+
+# POST http://localhost:3000/api/admin/verify
+# Content-Type: application/json
+
+# {
+#   "email": "kimenyujoseph@gmail.com",
+#   "verificationCode": "31850"
+# }
+
+
+# POST http://localhost:3000/api/customer/login
 # Content-Type: application/json
 
 # {
 #   "username": "kimenyu",
-#   "email": "kimenyujoseph73@gmail.com",
-#   "password": "example_password",
-#   "phoneNum": "+254712343678"
+#   "password": "example_password"
 # }
 
-# POST http://localhost:3000/api/customer/verify
+
+# POST http://localhost:3000/api/restaurant/create
 # Content-Type: application/json
 
 # {
-#   "email": "kimenyujoseph73@gmail.com",
-#   "verificationCode": "99232"
+#   "name": "Pizza hut",
+#   "description": "best pizza place",
+#   "address": "Rongai",
+#   "image": "pizzahut.png",
+#   "owner": "65f295731bd4780773511a77"
 # }
 
+# GET  http://localhost:3000/api/restaurant
 
-POST http://localhost:3000/api/customer/login
-Content-Type: application/json
+# DELETE   http://localhost:3000/api/restaurant/65f298491bd4780773511a81
+# Content-Type: application/json
 
-{
-  "username": "kimenyu",
-  "password": "example_password"
-}
+# {
+#   "name": "Pizza hut updated",
+#   "description": "best pizza place",
+#   "address": "Rongai",
+#   "image": "pizzahut.png",
+#   "owner": "65f295731bd4780773511a77"
+# }
