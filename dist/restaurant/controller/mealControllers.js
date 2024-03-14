@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchMeals = exports.updateMeal = exports.deleteMealById = exports.getMealById = exports.getMeals = exports.createMeal = void 0;
+exports.updateMeal = exports.deleteMealById = exports.getMealById = exports.getMeals = exports.createMeal = void 0;
 const Meals_1 = __importDefault(require("../models/Meals"));
 const restaurantModel_1 = __importDefault(require("../models/restaurantModel"));
 //create meal
@@ -106,26 +106,4 @@ const updateMeal = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateMeal = updateMeal;
-//search meals by name
-const searchMeals = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { name } = req.query;
-        // Check if name parameter is provided
-        if (!name || typeof name !== 'string') {
-            return res.status(400).json({ error: 'Name parameter is required' });
-        }
-        // Search meals by name
-        const meals = yield Meals_1.default.find({ name: { $regex: new RegExp(name, 'i') } });
-        if (meals.length === 0) {
-            return res.status(404).json({ error: 'No meals found with the provided name' });
-        }
-        // Return the found meals
-        res.json(meals);
-    }
-    catch (error) {
-        console.error('Error searching meals by name:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-exports.searchMeals = searchMeals;
 //# sourceMappingURL=mealControllers.js.map

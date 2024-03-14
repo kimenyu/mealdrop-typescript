@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const mealdropRoutes_1 = require("../routes/mealdropRoutes");
+// import jwt from "jsonwebtoken";
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -33,5 +34,14 @@ try {
 catch (error) {
     console.log(error);
 }
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYyODRhOGQ4YTAyMmYyODVmNWE5NGIiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwiaWF0IjoxNzEwNDQ0MDk5LCJleHAiOjE3MTA0NDc2OTl9.M8LzuMMcDykTmu90naAi3NXewrhJq4GQOvViK8BZz54';
+// jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//   if (err) {
+//     console.log('Failed to authenticate token');
+//   } else {
+//     console.log('Token successfully authenticated');
+//     console.log(decoded);
+//   }
+// });
 app.use("/api", mealdropRoutes_1.router);
 //# sourceMappingURL=app.js.map

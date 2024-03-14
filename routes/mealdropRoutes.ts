@@ -4,6 +4,7 @@ import { createAdmin, loginAdmin, verifyEmailAdmin } from "../accounts/controlle
 import { createDeliveryAgent, loginDeliveryAgent, verifyEmailCourier } from "../accounts/controllers/deliveryAgentControllers";
 import { createRestaurant, getRestaurants, getRestaurantById, updateRestaurant, deleteRestaurant } from "../restaurant/controller/restaurantController";
 import { createMeal, getMeals, getMealById, deleteMealById, updateMeal } from "../restaurant/controller/mealControllers";
+import { createOrder } from "../mealdrop/controllers/orderControllers";
 
 export const router = Router();
 
@@ -34,4 +35,7 @@ router.get("/meal/:id", getMealById);
 router.delete("/meal/delete/:id", deleteMealById);
 router.put("/meal/update/:id", updateMeal);
 
+
+//orders
+router.post("/order/create", createOrder);
 export default router;

@@ -9,10 +9,14 @@ const customerSchema = new mongoose_1.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true, default: 'customer' },
-    location: { type: String },
     phoneNum: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
+    location: {
+        longitude: { type: String },
+        latitude: { type: String },
+        address: { type: String }
+    },
 });
 exports.default = (0, mongoose_1.model)('Customer', customerSchema);
 //# sourceMappingURL=customer.js.map

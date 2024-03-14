@@ -7,6 +7,7 @@ const adminControllers_1 = require("../accounts/controllers/adminControllers");
 const deliveryAgentControllers_1 = require("../accounts/controllers/deliveryAgentControllers");
 const restaurantController_1 = require("../restaurant/controller/restaurantController");
 const mealControllers_1 = require("../restaurant/controller/mealControllers");
+const orderControllers_1 = require("../mealdrop/controllers/orderControllers");
 exports.router = (0, express_1.Router)();
 exports.router.post("/customer/register", customerAccountsController_1.createCustomer);
 exports.router.post("/customer/login", customerAccountsController_1.loginCustomer);
@@ -30,6 +31,7 @@ exports.router.get("/meal/all", mealControllers_1.getMeals);
 exports.router.get("/meal/:id", mealControllers_1.getMealById);
 exports.router.delete("/meal/delete/:id", mealControllers_1.deleteMealById);
 exports.router.put("/meal/update/:id", mealControllers_1.updateMeal);
-exports.router.get("/meal/search", mealControllers_1.searchMeals);
+//orders
+exports.router.post("/order/create", orderControllers_1.createOrder);
 exports.default = exports.router;
 //# sourceMappingURL=mealdropRoutes.js.map
