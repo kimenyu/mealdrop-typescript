@@ -6,6 +6,7 @@ const customerAccountsController_1 = require("../accounts/controllers/customerAc
 const adminControllers_1 = require("../accounts/controllers/adminControllers");
 const deliveryAgentControllers_1 = require("../accounts/controllers/deliveryAgentControllers");
 const restaurantController_1 = require("../restaurant/controller/restaurantController");
+const mealControllers_1 = require("../restaurant/controller/mealControllers");
 exports.router = (0, express_1.Router)();
 exports.router.post("/customer/register", customerAccountsController_1.createCustomer);
 exports.router.post("/customer/login", customerAccountsController_1.loginCustomer);
@@ -19,9 +20,16 @@ exports.router.post("/delivery-agent/login", deliveryAgentControllers_1.loginDel
 exports.router.post("/delivery-agent/verify", deliveryAgentControllers_1.verifyEmailCourier);
 //restuarant routes
 exports.router.post("/restaurant/create", restaurantController_1.createRestaurant);
-exports.router.get("/restaurant", restaurantController_1.getRestaurants);
+exports.router.get("/restaurant/all", restaurantController_1.getRestaurants);
 exports.router.get("/restaurant/:id", restaurantController_1.getRestaurantById);
-exports.router.put("/restaurant/:id", restaurantController_1.updateRestaurant);
-exports.router.delete("/restaurant/:id", restaurantController_1.deleteRestaurant);
+exports.router.put("/restaurant/update/:id", restaurantController_1.updateRestaurant);
+exports.router.delete("/restaurant/delete/:id", restaurantController_1.deleteRestaurant);
+//meal routes
+exports.router.post("/meal/create", mealControllers_1.createMeal);
+exports.router.get("/meal/all", mealControllers_1.getMeals);
+exports.router.get("/meal/:id", mealControllers_1.getMealById);
+exports.router.delete("/meal/delete/:id", mealControllers_1.deleteMealById);
+exports.router.put("/meal/update/:id", mealControllers_1.updateMeal);
+exports.router.get("/meal/search", mealControllers_1.searchMeals);
 exports.default = exports.router;
 //# sourceMappingURL=mealdropRoutes.js.map

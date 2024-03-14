@@ -50,3 +50,28 @@
 #   "image": "pizzahut.png",
 #   "owner": "65f295731bd4780773511a77"
 # }
+
+# POST http://localhost:3000/api/meal/create
+# Content-Type: application/json
+
+# {
+#   "name": "Pizza hut pizza",
+#   "price": 1100,
+#   "description": "Taste the best pizza from Pizza hut",
+#   "image": "pizza.png",
+#   "restaurant": "65f297841bd4780773511a7e"
+# }
+
+# GET  http://localhost:3000/api/meal/all
+
+# PUT  http://localhost:3000/api/meal/update/65f2a39e03bac90a68240d20
+# Content-Type: application/json
+
+# {
+#   "name": "Coffee",
+#   "price": 250,
+#   "description": "Taste the best coffe",
+#   "image": "coffee.png"
+# }
+
+GET http://localhost:3000/api/meal/search?name=Coffee
