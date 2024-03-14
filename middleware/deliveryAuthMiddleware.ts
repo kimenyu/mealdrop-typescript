@@ -2,19 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 interface DecodedToken {
-  userId: string;
   role: string;
 }
 
-// Extend the Request interface to include a 'user' property
-interface CustomRequest extends Request {
-  user?: {
-    id: string;
-    role: string;
-  };
-}
-
-export const authMiddleware = (req: CustomRequest, res: Response, next: NextFunction) => {
+export const couriersAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
   // Get the JWT token from the Authorization header
   const authHeader = req.headers['authorization'];
   if (!authHeader) {
@@ -25,15 +16,14 @@ export const authMiddleware = (req: CustomRequest, res: Response, next: NextFunc
 
   try {
     // Verify the JWT token
-    const decoded = jwt.verify(token, 'process.env.JWT_SECRET') as DecodedToken;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as DecodedToken;
     
-    // Attach user ID and role to request object
-    req.user = {
-      id: decoded.userId,
-      role: decoded.role
-    };
+    // Check if the user role is "customer"
+    if (decoded.role !== 'deliveryAgent') {
+      return res.status(403).json({ error: 'Forbidden - Only couriers are allowed' });
+    }
 
-    // Proceed with the request
+    // If the user is a customer, proceed with the request
     next();
   } catch (error) {
     // Handle JWT verification errors

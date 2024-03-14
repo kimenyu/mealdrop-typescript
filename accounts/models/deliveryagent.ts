@@ -21,7 +21,7 @@ const deliveryAgentSchema: Schema<DeliveryAgent> = new Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true},
     password: { type: String, required: true },
-    role: { type: String, required: true, default: 'delieveryAgent'},
+    role: { type: String, required: true, default: 'deliveryAgent'},
     phoneNum: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
