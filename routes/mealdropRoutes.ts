@@ -9,6 +9,7 @@ import { createOrder } from "../mealdrop/controllers/orderControllers";
 import { adminAuthMiddleware } from "../middleware/adminAuthMiddleware";
 import { cancelOrder } from "../mealdrop/controllers/cancelOrder";
 import { getAllOrdersByRestaurant } from "../mealdrop/controllers/restaurantOrders";
+import { getUserOrders } from "../mealdrop/controllers/customerOrdersContoller";
 
 export const router = Router();
 
@@ -42,6 +43,7 @@ router.put("/meal/update/:id", adminAuthMiddleware, updateMeal);
 //orders
 router.post("/order/create", createOrder);
 router.delete('/orders/cancel/:orderId', cancelOrder);
+router.get('/users/my-orders', getUserOrders); //get user orders
 
 //restaurant orders
 router.get('/restaurants/:restaurantId/orders', getAllOrdersByRestaurant); //fetching orders by restaurant

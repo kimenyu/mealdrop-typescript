@@ -32,9 +32,9 @@
 
 # DELETE  http://localhost:3000/api/orders/65f35b3c2177f18ef9834476
 
-# POST http://localhost:3000/api/order/create
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYzZjY5NWI3MjRlNTk4NzdkMGYyZmYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoQGdtYWlsLmNvbSIsImlhdCI6MTcxMDQ4NzI4NywiZXhwIjoxNzEwNDkwODg3fQ.0Ramzay3UgmiarM6wam4W13IRrnmuvC6X-tSEWAsZbo
+GET  http://localhost:3000/api/users/my-orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYzZjY5NWI3MjRlNTk4NzdkMGYyZmYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoQGdtYWlsLmNvbSIsImlhdCI6MTcxMDQ4NzI4NywiZXhwIjoxNzEwNDkwODg3fQ.0Ramzay3UgmiarM6wam4W13IRrnmuvC6X-tSEWAsZbo
 
 # {
 #   "meals": [
@@ -53,7 +53,7 @@
 #   ]
 # }
 
-GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
+# GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
 
 
 
