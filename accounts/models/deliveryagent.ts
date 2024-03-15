@@ -12,6 +12,8 @@ export interface DeliveryAgent extends Document {
     createdAt: Date;
     isVerified: boolean;
     verificationCode?: string; 
+    status: 'available' | 'unavailable';
+    assignedOrders: Schema.Types.ObjectId[];
 
 }
 
@@ -25,6 +27,8 @@ const deliveryAgentSchema: Schema<DeliveryAgent> = new Schema({
     phoneNum: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
+    status: { type: String, enum: ['available', 'unavailable'], default: 'available' },
+    assignedOrders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 });
 
 export default model<DeliveryAgent>('DeliveryAgent', deliveryAgentSchema);

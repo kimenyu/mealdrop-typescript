@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.customerAuthMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const customerAuthMiddleware = (req, res, next) => {
     // Get the JWT token from the Authorization header
     const authHeader = req.headers['authorization'];

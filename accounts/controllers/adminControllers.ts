@@ -171,7 +171,17 @@ export const loginAdmin = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Invalid password" });
         }
 
-        const token = jwt.sign({ userId: admin._id, userEmail: admin.email}, jwtsecret, { expiresIn: "1h" });
+        // const token = jwt.sign({ userId: admin._id, userEmail: admin.email}, jwtsecret, { expiresIn: "1h" });
+        const token = jwt.sign(
+            {
+              userId: admin._id,
+              userEmail: admin.email,
+              role: 'admin',
+              iat: Date.now(),
+              exp: Date.now() + 3600 * 24 * 7, // token expires in 7 days
+            },
+            jwtsecret
+          );
         return res.status(200).json({ message: "Customer logged in successfully", email: admin.email, token });
     } catch (error) {
         console.log(error);

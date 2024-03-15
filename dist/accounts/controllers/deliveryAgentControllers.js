@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginDeliveryAgent = exports.verifyEmailCourier = exports.createDeliveryAgent = void 0;
-const customer_1 = __importDefault(require("../models/customer"));
+const deliveryagent_1 = __importDefault(require("../models/deliveryagent"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const numParser_1 = __importDefault(require("../../utils/number-parser/numParser"));
 const email_validator_1 = require("email-validator");
@@ -43,11 +43,11 @@ const createDeliveryAgent = (req, res) => __awaiter(void 0, void 0, void 0, func
         if (!(0, numParser_1.default)(phoneNum)) {
             return res.status(400).json({ message: "Invalid phone number" });
         }
-        const existingPhoneNum = yield customer_1.default.findOne({ phoneNum });
+        const existingPhoneNum = yield deliveryagent_1.default.findOne({ phoneNum });
         if (existingPhoneNum) {
             return res.status(400).json({ message: "Phone number already exists" });
         }
-        const existingUsername = yield customer_1.default.findOne({ username });
+        const existingUsername = yield deliveryagent_1.default.findOne({ username });
         if (existingUsername) {
             return res.status(400).json({ message: "Username already exists" });
         }
@@ -57,17 +57,17 @@ const createDeliveryAgent = (req, res) => __awaiter(void 0, void 0, void 0, func
         if (!(0, email_validator_1.validate)(email)) {
             return res.status(400).json({ message: "Invalid email" });
         }
-        const existingEmail = yield customer_1.default.findOne({ email });
+        const existingEmail = yield deliveryagent_1.default.findOne({ email });
         if (existingEmail) {
             return res.status(400).json({ message: "Email already exists" });
         }
-        const delieveryAgent = yield customer_1.default.findOne({ email });
+        const delieveryAgent = yield deliveryagent_1.default.findOne({ email });
         if (delieveryAgent) {
             return res.status(400).json({ message: "Customer already exists" });
         }
         const verificationCode = (0, verifyaccounts_1.default)().toString();
         const hashedPassword = yield bcrypt_1.default.hash(password, 10);
-        const newCustomer = new customer_1.default({
+        const newCustomer = new deliveryagent_1.default({
             username,
             email,
             password: hashedPassword,
@@ -104,7 +104,7 @@ const verifyEmailCourier = (req, res) => __awaiter(void 0, void 0, void 0, funct
     const { email, verificationCode } = req.body;
     try {
         // Find the customer by email
-        const delieveryAgent = yield customer_1.default.findOne({ email });
+        const delieveryAgent = yield deliveryagent_1.default.findOne({ email });
         if (!delieveryAgent) {
             return res.status(404).json({ message: "Courier not found" });
         }
@@ -145,7 +145,7 @@ const loginDeliveryAgent = (req, res) => __awaiter(void 0, void 0, void 0, funct
         if (!username || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        const delieveryAgent = yield customer_1.default.findOne({ username });
+        const delieveryAgent = yield deliveryagent_1.default.findOne({ username });
         if (!delieveryAgent) {
             return res.status(400).json({ message: "Customer does not exist" });
         }

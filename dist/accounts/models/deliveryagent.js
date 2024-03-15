@@ -12,6 +12,8 @@ const deliveryAgentSchema = new mongoose_1.Schema({
     phoneNum: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
+    status: { type: String, enum: ['available', 'unavailable'], default: 'available' },
+    assignedOrders: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Order' }],
 });
 exports.default = (0, mongoose_1.model)('DeliveryAgent', deliveryAgentSchema);
 //# sourceMappingURL=deliveryagent.js.map

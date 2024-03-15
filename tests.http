@@ -1,0 +1,110 @@
+
+# POST http://localhost:3000/api/admin/register
+# Content-Type: application/json
+
+# {
+#   "username": "admin",
+#   "email": "mbuguakimenyu@gmail.com",
+#   "password": "example_password",
+#   "phoneNum": "+254793058969"
+# }
+
+# POST http://localhost:3000/api/admin/verify
+# Content-Type: application/json
+
+# {
+#   "email": "mbuguakimenyu@gmail.com",
+#   "verificationCode": "10120"
+# }
+
+
+# POST http://localhost:3000/api/admin/login
+# Content-Type: application/json
+
+# {
+#   "username": "admin",
+#   "password": "example_password"
+# }
+
+### Request with Bearer Token
+
+
+
+# DELETE  http://localhost:3000/api/orders/65f35b3c2177f18ef9834476
+
+
+# POST http://localhost:3000/api/order/dispatch/65f3f88b8877e0b444994c72
+
+# GET http://localhost:3000/api/users/my-orders
+
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0OGMxOGU5MWY5MDNmOGY5MzU5MWUiLCJ1c2VyRW1haWwiOiJuam9yb2dla2ltZW55dUBnbWFpbC5jb20iLCJpYXQiOjE3MTA1MjU2NDEsImV4cCI6MTcxMDUyOTI0MX0.9TsjcphrmH2d2Xif-FHfv2NEGpvxLoYJ5FGIhQNaIMg
+#  {
+#   "meals": [
+#     {
+#       "meal_id": "65f2a39e03bac90a68240d20",
+#       "quantity": 10
+#     },
+#     {
+#       "meal_id": "65f2a3c203bac90a68240d23",
+#       "quantity": 10
+#     },
+#     {
+#       "meal_id": "65f2a3ed03bac90a68240d29",
+#       "quantity": 10
+#     }
+#   ]
+# }
+
+# GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
+
+
+
+# POST http://localhost:3000/api/restaurant/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDUzNzA4NzMyMiwiZXhwIjoxNzEwNTM3NjkyMTIyfQ.qn4K53_RP56TAPbG_0TS2IDgL0OpylDfVhs8dfojS9o
+
+# {
+#   "name": "Jajamelo pizza",
+#   "description": "Thi is where the best pizza resides",
+#   "address": "Rongai",
+#   "image": "jajamelo.png",
+#   "owner": "65f4b937bd74a0be2c49bd41"
+# }
+
+# GET  http://localhost:3000/api/restaurant
+
+# DELETE   http://localhost:3000/api/restaurant/65f298491bd4780773511a81
+# Content-Type: application/json
+
+# {
+#   "name": "Pizza hut updated",
+#   "description": "best pizza place",
+#   "address": "Rongai",
+#   "image": "pizzahut.png",
+#   "owner": "65f295731bd4780773511a77"
+# }
+
+POST http://localhost:3000/api/meal/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDUzNzA4NzMyMiwiZXhwIjoxNzEwNTM3NjkyMTIyfQ.qn4K53_RP56TAPbG_0TS2IDgL0OpylDfVhs8dfojS9o
+
+{
+  "name": "The beef pizza",
+  "price": 950,
+  "description": "Taste the best pizza from beef pizza",
+  "image": "pizza.png",
+  "restaurant": "65f4befdbd74a0be2c49bd46"
+}
+
+# GET  http://localhost:3000/api/meal/all
+
+# PUT  http://localhost:3000/api/meal/update/65f2a39e03bac90a68240d20
+# Content-Type: application/json
+
+# {
+#   "name": "Coffee",
+#   "price": 250,
+#   "description": "Taste the best coffe",
+#   "image": "coffee.png"
+# }

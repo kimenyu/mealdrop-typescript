@@ -5,7 +5,7 @@ import { createDeliveryAgent, loginDeliveryAgent, verifyEmailCourier } from "../
 import { createRestaurant, getRestaurants, getRestaurantById, updateRestaurant, deleteRestaurant } from "../restaurant/controller/restaurantController";
 import { createMeal, getMeals, getMealById, deleteMealById, updateMeal } from "../restaurant/controller/mealControllers";
 import { createOrder } from "../mealdrop/controllers/orderControllers";
-// import { customerAuthMiddleware } from "../middleware/customerAuthMiddleware";
+import { customerAuthMiddleware } from "../middleware/customerAuthMiddleware";
 import { adminAuthMiddleware } from "../middleware/adminAuthMiddleware";
 import { cancelOrder } from "../mealdrop/controllers/cancelOrder";
 import { getAllOrdersByRestaurant } from "../mealdrop/controllers/restaurantOrders";
@@ -43,10 +43,10 @@ router.put("/meal/update/:id", adminAuthMiddleware, updateMeal);
 
 
 //orders
-router.post("/order/create", createOrder);
-router.delete('/orders/cancel/:orderId', cancelOrder);
-router.get('/users/my-orders', getUserOrders); //get user orders
-router.put('/order/update/:orderId', updateOrder);
+router.post("/order/create", customerAuthMiddleware, createOrder);
+router.delete('/orders/cancel/:orderId', customerAuthMiddleware, cancelOrder);
+router.get('/users/my-orders', customerAuthMiddleware, getUserOrders); //get user orders
+router.put('/order/update/:orderId', customerAuthMiddleware, updateOrder);
 router.post('/order/dispatch/:orderId', dispatchOrder);
 
 //restaurant orders

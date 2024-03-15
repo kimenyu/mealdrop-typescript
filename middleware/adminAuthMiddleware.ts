@@ -1,8 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-
+import dotenv from 'dotenv';
+dotenv.config();
 interface DecodedToken {
+  userId: string;
+  userEmail: string;
   role: string;
+  iat: number;
+  exp: number;
 }
 
 export const adminAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -17,6 +22,7 @@ export const adminAuthMiddleware = (req: Request, res: Response, next: NextFunct
   try {
     // Verify the JWT token
     const decoded = jwt.verify(token, process.env.JWT_SECRET) as DecodedToken;
+    console.log(decoded);
     
     // Check if the user role is "customer"
     if (decoded.role !== 'admin') {

@@ -1,8 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-
+import dotenv from 'dotenv';
+dotenv.config();
 interface DecodedToken {
+  userId: string;
+  userEmail: string;
   role: string;
+  iat: number;
+  exp: number;
 }
 
 export const couriersAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
