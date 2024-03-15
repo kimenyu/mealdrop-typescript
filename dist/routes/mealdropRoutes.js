@@ -13,6 +13,7 @@ const adminAuthMiddleware_1 = require("../middleware/adminAuthMiddleware");
 const cancelOrder_1 = require("../mealdrop/controllers/cancelOrder");
 const restaurantOrders_1 = require("../mealdrop/controllers/restaurantOrders");
 const customerOrdersContoller_1 = require("../mealdrop/controllers/customerOrdersContoller");
+const updateOrderController_1 = require("../mealdrop/controllers/updateOrderController");
 exports.router = (0, express_1.Router)();
 exports.router.post("/customer/register", customerAccountsController_1.createCustomer);
 exports.router.post("/customer/login", customerAccountsController_1.loginCustomer);
@@ -40,6 +41,7 @@ exports.router.put("/meal/update/:id", adminAuthMiddleware_1.adminAuthMiddleware
 exports.router.post("/order/create", orderControllers_1.createOrder);
 exports.router.delete('/orders/cancel/:orderId', cancelOrder_1.cancelOrder);
 exports.router.get('/users/my-orders', customerOrdersContoller_1.getUserOrders); //get user orders
+exports.router.put('/order/update/:orderId', updateOrderController_1.updateOrder);
 //restaurant orders
 exports.router.get('/restaurants/:restaurantId/orders', restaurantOrders_1.getAllOrdersByRestaurant); //fetching orders by restaurant
 exports.default = exports.router;
