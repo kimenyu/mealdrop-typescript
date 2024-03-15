@@ -1,20 +1,20 @@
 
-# POST http://localhost:3000/api/admin/register
+# POST http://localhost:3000/api/customer/register
 # Content-Type: application/json
 
 # {
-#   "username": "kimkoe",
+#   "username": "kim",
 #   "email": "kimenyujoseph@gmail.com",
 #   "password": "example_password",
-#   "phoneNum": "+254712349673"
+#   "phoneNum": "+254732349673"
 # }
 
-# POST http://localhost:3000/api/admin/verify
+# POST http://localhost:3000/api/customer/verify
 # Content-Type: application/json
 
 # {
 #   "email": "kimenyujoseph@gmail.com",
-#   "verificationCode": "35485"
+#   "verificationCode": "67613"
 # }
 
 
@@ -22,7 +22,7 @@
 # Content-Type: application/json
 
 # {
-#   "username": "kimenyu",
+#   "username": "kim",
 #   "password": "example_password"
 # }
 
@@ -30,22 +30,30 @@
 
 
 
-DELETE  http://localhost:3000/api/orders/65f35b3c2177f18ef9834476
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYyODRhOGQ4YTAyMmYyODVmNWE5NGIiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwiaWF0IjoxNzEwNDg1MDU0LCJleHAiOjE3MTA0ODg2NTR9.Jr33Htr_ETjbcI3oYUJAOKL8I83Uz8FfqhXTaCsXVe0
+# DELETE  http://localhost:3000/api/orders/65f35b3c2177f18ef9834476
+
+# POST http://localhost:3000/api/order/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYzZjY5NWI3MjRlNTk4NzdkMGYyZmYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoQGdtYWlsLmNvbSIsImlhdCI6MTcxMDQ4NzI4NywiZXhwIjoxNzEwNDkwODg3fQ.0Ramzay3UgmiarM6wam4W13IRrnmuvC6X-tSEWAsZbo
 
 # {
-#     "meals": [
-#         {
-#             "meal_id": "65f2a39e03bac90a68240d20",
-#             "quantity": 5
-#         },
-#         {
-#             "meal_id": "65f2a3c203bac90a68240d23",
-#             "quantity": 3
-#         }
-#     ]
+#   "meals": [
+#     {
+#       "meal_id": "65f2a39e03bac90a68240d20",
+#       "quantity": 5
+#     },
+#     {
+#       "meal_id": "65f2a3c203bac90a68240d23",
+#       "quantity": 3
+#     },
+#     {
+#       "meal_id": "65f2a3ed03bac90a68240d29",
+#       "quantity": 4
+#     }
+#   ]
 # }
+
+GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
 
 
 
