@@ -7,6 +7,7 @@ import { createMeal, getMeals, getMealById, deleteMealById, updateMeal } from ".
 import { createOrder } from "../mealdrop/controllers/orderControllers";
 import { customerAuthMiddleware } from "../middleware/customerAuthMiddleware";
 import { adminAuthMiddleware } from "../middleware/adminAuthMiddleware";
+import { cancelOrder } from "../mealdrop/controllers/cancelOrder";
 
 export const router = Router();
 
@@ -39,4 +40,6 @@ router.put("/meal/update/:id", adminAuthMiddleware, updateMeal);
 
 //orders
 router.post("/order/create", customerAuthMiddleware, createOrder);
+router.delete('/orders/:orderId', cancelOrder);
+
 export default router;

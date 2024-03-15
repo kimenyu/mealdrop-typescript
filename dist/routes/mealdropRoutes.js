@@ -10,6 +10,7 @@ const mealControllers_1 = require("../restaurant/controller/mealControllers");
 const orderControllers_1 = require("../mealdrop/controllers/orderControllers");
 const customerAuthMiddleware_1 = require("../middleware/customerAuthMiddleware");
 const adminAuthMiddleware_1 = require("../middleware/adminAuthMiddleware");
+const cancelOrder_1 = require("../mealdrop/controllers/cancelOrder");
 exports.router = (0, express_1.Router)();
 exports.router.post("/customer/register", customerAccountsController_1.createCustomer);
 exports.router.post("/customer/login", customerAccountsController_1.loginCustomer);
@@ -35,5 +36,6 @@ exports.router.delete("/meal/delete/:id", adminAuthMiddleware_1.adminAuthMiddlew
 exports.router.put("/meal/update/:id", adminAuthMiddleware_1.adminAuthMiddleware, mealControllers_1.updateMeal);
 //orders
 exports.router.post("/order/create", customerAuthMiddleware_1.customerAuthMiddleware, orderControllers_1.createOrder);
+exports.router.delete('/orders/:orderId', cancelOrder_1.cancelOrder);
 exports.default = exports.router;
 //# sourceMappingURL=mealdropRoutes.js.map
