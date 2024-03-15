@@ -34,27 +34,27 @@
 
 
 
-PUT http://localhost:3000/api/order/update/65f3f8578877e0b444994c1d
+POST http://localhost:3000/api/order/dispatch/65f3f8578877e0b444994c1d
 # GET http://localhost:3000/api/users/my-orders
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYzZjY5NWI3MjRlNTk4NzdkMGYyZmYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoQGdtYWlsLmNvbSIsImlhdCI6MTcxMDQ5MjY2NSwiZXhwIjoxNzEwNDk2MjY1fQ.fFzVbCYtERK8JPTU_TW6xnpBY5fuFhGC_aFYFyRpV-4
 
-{
-  "meals": [
-    {
-      "meal_id": "65f2a39e03bac90a68240d20",
-      "quantity": 10
-    },
-    {
-      "meal_id": "65f2a3c203bac90a68240d23",
-      "quantity": 10
-    },
-    {
-      "meal_id": "65f2a3ed03bac90a68240d29",
-      "quantity": 10
-    }
-  ]
-}
+# {
+#   "meals": [
+#     {
+#       "meal_id": "65f2a39e03bac90a68240d20",
+#       "quantity": 10
+#     },
+#     {
+#       "meal_id": "65f2a3c203bac90a68240d23",
+#       "quantity": 10
+#     },
+#     {
+#       "meal_id": "65f2a3ed03bac90a68240d29",
+#       "quantity": 10
+#     }
+#   ]
+# }
 
 # GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
 

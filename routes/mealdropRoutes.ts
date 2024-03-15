@@ -11,6 +11,7 @@ import { cancelOrder } from "../mealdrop/controllers/cancelOrder";
 import { getAllOrdersByRestaurant } from "../mealdrop/controllers/restaurantOrders";
 import { getUserOrders } from "../mealdrop/controllers/customerOrdersContoller";
 import { updateOrder } from "../mealdrop/controllers/updateOrderController";
+import { dispatchOrder } from "../mealdrop/controllers/dispatchingOrderController";
 
 export const router = Router();
 
@@ -46,6 +47,7 @@ router.post("/order/create", createOrder);
 router.delete('/orders/cancel/:orderId', cancelOrder);
 router.get('/users/my-orders', getUserOrders); //get user orders
 router.put('/order/update/:orderId', updateOrder);
+router.post('/order/dispatch/:orderId', dispatchOrder);
 
 //restaurant orders
 router.get('/restaurants/:restaurantId/orders', getAllOrdersByRestaurant); //fetching orders by restaurant
