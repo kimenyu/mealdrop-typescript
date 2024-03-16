@@ -8,7 +8,7 @@ const deliveryAgentControllers_1 = require("../accounts/controllers/deliveryAgen
 const restaurantController_1 = require("../restaurant/controller/restaurantController");
 const mealControllers_1 = require("../restaurant/controller/mealControllers");
 const orderControllers_1 = require("../mealdrop/controllers/orderControllers");
-// import { customerAuthMiddleware } from "../middleware/customerAuthMiddleware";
+const customerAuthMiddleware_1 = require("../middleware/customerAuthMiddleware");
 const adminAuthMiddleware_1 = require("../middleware/adminAuthMiddleware");
 const cancelOrder_1 = require("../mealdrop/controllers/cancelOrder");
 const restaurantOrders_1 = require("../mealdrop/controllers/restaurantOrders");
@@ -39,10 +39,10 @@ exports.router.get("/meal/:id", mealControllers_1.getMealById);
 exports.router.delete("/meal/delete/:id", adminAuthMiddleware_1.adminAuthMiddleware, mealControllers_1.deleteMealById);
 exports.router.put("/meal/update/:id", adminAuthMiddleware_1.adminAuthMiddleware, mealControllers_1.updateMeal);
 //orders
-exports.router.post("/order/create", orderControllers_1.createOrder);
-exports.router.delete('/orders/cancel/:orderId', cancelOrder_1.cancelOrder);
-exports.router.get('/users/my-orders', customerOrdersContoller_1.getUserOrders); //get user orders
-exports.router.put('/order/update/:orderId', updateOrderController_1.updateOrder);
+exports.router.post("/order/create", customerAuthMiddleware_1.customerAuthMiddleware, orderControllers_1.createOrder);
+exports.router.delete('/orders/cancel/:orderId', customerAuthMiddleware_1.customerAuthMiddleware, cancelOrder_1.cancelOrder);
+exports.router.get('/users/my-orders', customerAuthMiddleware_1.customerAuthMiddleware, customerOrdersContoller_1.getUserOrders); //get user orders
+exports.router.put('/order/update/:orderId', customerAuthMiddleware_1.customerAuthMiddleware, updateOrderController_1.updateOrder);
 exports.router.post('/order/dispatch/:orderId', dispatchingOrderController_1.dispatchOrder);
 //restaurant orders
 exports.router.get('/restaurants/:restaurantId/orders', restaurantOrders_1.getAllOrdersByRestaurant); //fetching orders by restaurant

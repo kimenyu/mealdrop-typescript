@@ -175,8 +175,8 @@ export const loginDeliveryAgent = async (req: Request, res: Response) => {
         // const token = jwt.sign({ userId: delieveryAgent._id, userEmail: delieveryAgent.email}, jwtsecret, { expiresIn: "1h" });
         const token = jwt.sign(
             {
-              userId: deliveryAgent._id,
-              userEmail: deliveryAgent.email,
+              userId: delieveryAgent._id,
+              userEmail: delieveryAgent.email,
               role: 'deliveryAgent',
               iat: Date.now(),
               exp: Date.now() + 3600 * 24 * 7, // token expires in 7 days

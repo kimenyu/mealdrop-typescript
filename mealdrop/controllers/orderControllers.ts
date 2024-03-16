@@ -1,11 +1,19 @@
 import { Request, Response } from 'express';
 // import { validationResult } from 'express-validator';
 import Order from '../models/order';
-import Customer from '../../accounts/models/customer';
+// import Customer from '../../accounts/models/customer';
 import Meal from '../../restaurant/models/Meals';
 import jwt from 'jsonwebtoken';
 import Joi from "joi";
 import { validateJoiSchema } from "../../utils/validations/validateJoiSche";
+
+interface DecodedToken {
+  userId: string;
+  userEmail: string;
+  role: string;
+  iat: number;
+  exp: number;
+}
 
 const validationSchema = Joi.object({
   meals: Joi.array()
@@ -31,13 +39,10 @@ export const createOrder = async (req: Request, res: Response) => {
     }
 
     const token = Array.isArray(authHeader) ? authHeader[0].split(' ')[1] : authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as DecodedToken;
+    console.log(decoded);
     const customer_id = decoded.userId;
-
-    const customer = await Customer.findById(customer_id);
-    if (!customer) {
-      return res.status(404).json({ error: 'Customer not found' });
-    }
+    console.log(customer_id);
 
     let total_price = 0;
     let total_quantity = 0;
@@ -64,7 +69,8 @@ export const createOrder = async (req: Request, res: Response) => {
       totalQuantity: total_quantity
     });
 
-    await order.save();
+   await order.save();
+   console.log(order);
 
     res.status(201).json({ msg: "Order created successfully", data: order });
   } catch (error) {

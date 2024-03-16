@@ -156,7 +156,14 @@ const loginDeliveryAgent = (req, res) => __awaiter(void 0, void 0, void 0, funct
         if (!validPassword) {
             return res.status(400).json({ message: "Invalid password" });
         }
-        const token = jsonwebtoken_1.default.sign({ userId: delieveryAgent._id, userEmail: delieveryAgent.email }, jwtsecret, { expiresIn: "1h" });
+        // const token = jwt.sign({ userId: delieveryAgent._id, userEmail: delieveryAgent.email}, jwtsecret, { expiresIn: "1h" });
+        const token = jsonwebtoken_1.default.sign({
+            userId: delieveryAgent._id,
+            userEmail: delieveryAgent.email,
+            role: 'deliveryAgent',
+            iat: Date.now(),
+            exp: Date.now() + 3600 * 24 * 7, // token expires in 7 days
+        }, jwtsecret);
         return res.status(200).json({ message: "Customer logged in successfully", email: delieveryAgent.email, token });
     }
     catch (error) {

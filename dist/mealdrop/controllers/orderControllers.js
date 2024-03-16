@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createOrder = void 0;
 // import { validationResult } from 'express-validator';
 const order_1 = __importDefault(require("../models/order"));
-const customer_1 = __importDefault(require("../../accounts/models/customer"));
+// import Customer from '../../accounts/models/customer';
 const Meals_1 = __importDefault(require("../../restaurant/models/Meals"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const joi_1 = __importDefault(require("joi"));
@@ -40,11 +40,9 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
         const token = Array.isArray(authHeader) ? authHeader[0].split(' ')[1] : authHeader.split(' ')[1];
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        console.log(decoded);
         const customer_id = decoded.userId;
-        const customer = yield customer_1.default.findById(customer_id);
-        if (!customer) {
-            return res.status(404).json({ error: 'Customer not found' });
-        }
+        console.log(customer_id);
         let total_price = 0;
         let total_quantity = 0;
         const { meals } = payload;
@@ -66,6 +64,7 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             totalQuantity: total_quantity
         });
         yield order.save();
+        console.log(order);
         res.status(201).json({ msg: "Order created successfully", data: order });
     }
     catch (error) {

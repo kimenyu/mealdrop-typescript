@@ -18,11 +18,11 @@
 # }
 
 
-# POST http://localhost:3000/api/admin/login
+# POST http://localhost:3000/api/customer/login
 # Content-Type: application/json
 
 # {
-#   "username": "admin",
+#   "username": "kim",
 #   "password": "example_password"
 # }
 
@@ -37,24 +37,26 @@
 
 # GET http://localhost:3000/api/users/my-orders
 
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0OGMxOGU5MWY5MDNmOGY5MzU5MWUiLCJ1c2VyRW1haWwiOiJuam9yb2dla2ltZW55dUBnbWFpbC5jb20iLCJpYXQiOjE3MTA1MjU2NDEsImV4cCI6MTcxMDUyOTI0MX0.9TsjcphrmH2d2Xif-FHfv2NEGpvxLoYJ5FGIhQNaIMg
-#  {
-#   "meals": [
-#     {
-#       "meal_id": "65f2a39e03bac90a68240d20",
-#       "quantity": 10
-#     },
-#     {
-#       "meal_id": "65f2a3c203bac90a68240d23",
-#       "quantity": 10
-#     },
-#     {
-#       "meal_id": "65f2a3ed03bac90a68240d29",
-#       "quantity": 10
-#     }
-#   ]
-# }
+POST http://localhost:3000/api/order/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0OGI0YmU5MWY5MDNmOGY5MzU5MTYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzEwNTczNjU4NTA0LCJleHAiOjE3MTA1NzQyNjMzMDR9.8OZFfqGo7MuQNWWn6zyg2znU0td4AlWNo_EbCxDycz0
+
+{
+  "meals": [
+    {
+      "meal_id": "65f4c01cbd74a0be2c49bd48",
+      "quantity": 3
+    },
+    {
+      "meal_id": "65f4c19cbd74a0be2c49bd4e",
+      "quantity": 4
+    },
+    {
+      "meal_id": "65f4c1babd74a0be2c49bd51",
+      "quantity": 3
+    }
+  ]
+}
 
 # GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
 
@@ -62,13 +64,13 @@
 
 # POST http://localhost:3000/api/restaurant/create
 # Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDUzNzA4NzMyMiwiZXhwIjoxNzEwNTM3NjkyMTIyfQ.qn4K53_RP56TAPbG_0TS2IDgL0OpylDfVhs8dfojS9o
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDU3MjM2MDczNywiZXhwIjoxNzEwNTcyOTY1NTM3fQ.kPXYOTunvEMx7KubqAvvJ8zI9for--ldEWjYio-2YSw
 
 # {
-#   "name": "Jajamelo pizza",
-#   "description": "Thi is where the best pizza resides",
+#   "name": "chafua foodplace",
+#   "description": "This is where the best chafua resides",
 #   "address": "Rongai",
-#   "image": "jajamelo.png",
+#   "image": "chafua.png",
 #   "owner": "65f4b937bd74a0be2c49bd41"
 # }
 
@@ -85,17 +87,17 @@
 #   "owner": "65f295731bd4780773511a77"
 # }
 
-POST http://localhost:3000/api/meal/create
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDUzNzA4NzMyMiwiZXhwIjoxNzEwNTM3NjkyMTIyfQ.qn4K53_RP56TAPbG_0TS2IDgL0OpylDfVhs8dfojS9o
+# POST http://localhost:3000/api/meal/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0YjkzN2JkNzRhMGJlMmM0OWJkNDEiLCJ1c2VyRW1haWwiOiJtYnVndWFraW1lbnl1QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDUzNzA4NzMyMiwiZXhwIjoxNzEwNTM3NjkyMTIyfQ.qn4K53_RP56TAPbG_0TS2IDgL0OpylDfVhs8dfojS9o
 
-{
-  "name": "The beef pizza",
-  "price": 950,
-  "description": "Taste the best pizza from beef pizza",
-  "image": "pizza.png",
-  "restaurant": "65f4befdbd74a0be2c49bd46"
-}
+# {
+#   "name": "The beef pizza",
+#   "price": 950,
+#   "description": "Taste the best pizza from beef pizza",
+#   "image": "pizza.png",
+#   "restaurant": "65f4befdbd74a0be2c49bd46"
+# }
 
 # GET  http://localhost:3000/api/meal/all
 

@@ -17,6 +17,7 @@ const customerAuthMiddleware = (req, res, next) => {
     try {
         // Verify the JWT token
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        console.log(decoded);
         // Check if the user role is "customer"
         if (decoded.role !== 'customer') {
             return res.status(403).json({ error: 'Forbidden - Only customers are allowed' });
