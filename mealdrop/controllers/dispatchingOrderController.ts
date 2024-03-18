@@ -1,11 +1,25 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import Order from '../models/order';
-import DeliveryAgent from '../../accounts/models/deliveryagent';
-import Meal from '../../restaurant/models/Meals';
-import jwt from 'jsonwebtoken';
+// import Meal from '../../restaurant/models/Meals';
+// import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+// import { verify } from 'jsonwebtoken';
+import  Customer  from '../../accounts/models/customer';
+import DeliveryAgent  from '../../accounts/models/deliveryagent';
+import jwt from 'jsonwebtoken';
 
-export const dispatchOrder = async (req: Request, res: Response) => {
+dotenv.config();
+interface DecodedToken {
+  userId: string;
+  userEmail: string;
+  role: string;
+  iat: number;
+  exp: number;
+  customerId: string;
+}
+
+export const dispatchOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
@@ -13,130 +27,90 @@ export const dispatchOrder = async (req: Request, res: Response) => {
     }
 
     const token = Array.isArray(authHeader) ? authHeader[0].split(' ')[1] : authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded Token:', decoded); // Log decoded token
-    const user_id = decoded.userId;
-    const user_email = decoded.userEmail;
-    console.log(user_id);
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as DecodedToken;
+    console.log(decoded);
+    const customer_id = decoded.userId;
+    console.log(customer_id);
 
-    if (!user_email) {
-      return res.status(400).json({ error: 'User email not found in token' });
+    if (!customer_id) {
+      return res.status(404).json({ error: 'Customer not found.' });
     }
 
-    const order_id = req.params.orderId;
-    const order = await Order.findById(order_id)
-      .populate('meals.meal')
-      .populate({
-        path: 'meals.meal',
-        populate: {
-          path: 'restaurant',
-          model: 'Restaurant',
-        },
-      })
-      .populate('customer');
+    const customer = await Customer.findById(decoded.userId);
 
+    const deliveryAgent = await DeliveryAgent.findOne({ role: 'deliveryAgent', status: 'available' });
+    if (!deliveryAgent) {
+      return res.status(404).json({ error: 'No available delivery agent found.' });
+    }
+
+    // const { orderId } = req.body;
+
+    const order = await Order.findOne({ customer: decoded.userId }).populate('customer').populate('deliveryAgent');
+    console.log("Order exists: ", !!order);
     if (!order) {
-      return res.status(404).json({ error: 'Order not found' });
-    }
-
-    if (order.status !== 'pending') {
-      return res.status(400).json({ error: 'Order is not in a dispatchable state' });
-    }
-
-    // Assign the order to a delivery agent
-    const availableDriver = await DeliveryAgent.findOne({ status: 'available' });
-    if (!availableDriver) {
-      return res.status(404).json({ error: 'No available delivery agent' });
+      return res.status(404).json({ error: 'Order not found.' });
     }
 
     order.status = 'dispatched';
-    order.deliveryAgent = availableDriver._id;
-    availableDriver.assignedOrders.push(order._id);
+    order.deliveryAgent = deliveryAgent._id;
+    await order.save();
 
-    const mealPromises = order.meals.map(async (mealItem) => {
-      const meal = await Meal.findById(mealItem.meal.toString());
-      return { name: meal.name, quantity: mealItem.quantity, price: meal.price };
-    });
-    const mealsData = await Promise.all(mealPromises);
+    customer.assignedOrders.push(order._id);
+    await customer.save();
 
-    const restaurant = order.meals[0].restaurant;
+    deliveryAgent.assignedOrders.push(order._id);
+    await deliveryAgent.save();
 
-    // Send email to delivery agent
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.SENDER_EMAIL,
-        pass: process.env.SENDER_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+    const meals: { name: string; quantity: number; restaurant: string; totalPrice: number;}[] = order.meals.map(meal => ({
+      name: meal?.name as string,
+      quantity: meal?.quantity,
+      restaurant: (meal as unknown as { restaurant: { name: string } }).restaurant?.name as string,
+      totalPrice: meal?.quantity && meal?.price ? Number(meal.quantity) * Number(meal.price) : 0
+    }));
 
-    const mailOptionsToDriver = {
-      from: process.env.SENDER_EMAIL,
-      to: availableDriver.email,
-      subject: 'New Order Assigned',
-      html: `
-        <p>Hello,</p>
-        <p>You have been assigned with an order. Here are the details:</p>
-        <p>Restaurant: ${restaurant.name}</p>
-        <p>Order ID: ${order._id}</p>
-        <p>Meals:</p>
-        <ul>
-          ${mealsData.map(meal => `<li>${meal.name} (Quantity: ${meal.quantity}, Price: ${meal.price})</li>`).join('')}
-        </ul>
-        <p>Total Price: ${order.totalPrice}</p>
-        <p>Thank you for choosing us!</p>
-      `,
-    };
+    console.log(meals);
+    console.log(customer.email, customer.firstname, deliveryAgent.email, deliveryAgent.firstname, meals);
 
-    transporter.sendMail(mailOptionsToDriver, (error, info) => {
-      if (error) {
-        console.error('Error sending email to driver:', error);
-      } else {
-        console.log('Email sent to driver:', info.response);
-      }
-    });
+    await sendOrderDispatchEmail(customer.email, customer.firstname, deliveryAgent.email, deliveryAgent.firstname, meals);
 
-    // Send email to user
-    const mailOptionsToUser = {
-      from: process.env.SENDER_EMAIL,
-      to: user_email,
-      subject: 'Order Dispatched',
-      html: `
-        <p>Hello,</p>
-        <p>Your order has been dispatched. Here are the details:</p>
-        <p>Restaurant: ${restaurant.name}</p>
-        <p>Order ID: ${order._id}</p>
-        <p>Meals:</p>
-        <ul>
-          ${mealsData.map(meal => `<li>${meal.name} (Quantity: ${meal.quantity}, Price: ${meal.price})</li>`).join('')}
-        </ul>
-        <p>Total Price: ${order.totalPrice}</p>
-        <p>Thank you for choosing us!</p>
-      `,
-    };
-
-    if (user_email) {
-      transporter.sendMail(mailOptionsToUser, (error, info) => {
-        if (error) {
-          console.error('Error sending email to user:', error);
-        } else {
-          console.log('Email sent to user:', info.response);
-        }
-      });
-    } else {
-      console.error('Invalid or missing recipient email address');
-      return res.status(400).json({ error: 'Invalid or missing recipient email address' });
-    }
-
-    res.status(200).json({ msg: 'Order dispatched successfully', data: order });
+    res.status(200).json({ message: 'Order dispatched successfully.' });
   } catch (error) {
-    console.error(error);
-    if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-    res.status(500).json({ error: 'Something went wrong' });
+    next(error);
   }
 };
+
+// Function to send order dispatch email
+async function sendOrderDispatchEmail(customerEmail: string, customerName: string, deliveryAgentEmail: string, deliveryAgentName: string, Order: { name: string; quantity: number; restaurant: string; totalPrice: number;}[]) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  const mailOptionsCustomer = {
+    from: process.env.SENDER_EMAIL,
+    to: customerEmail,
+    subject: 'Order Dispatched',
+    text: `Dear ${customerName}, your order has been dispatched.`
+  };
+
+  const mailOptionsDeliveryAgent = {
+    from: process.env.SENDER_EMAIL,
+    to: deliveryAgentEmail,
+    subject: 'New Order Assignment',
+    html: `
+      <h1>New Order Assignment</h1>
+      <p>Dear courier, you have been assigned a new order.</p>
+       ${Order}, ${deliveryAgentName}
+    `,
+  };
+
+  await transporter.sendMail(mailOptionsCustomer);
+  await transporter.sendMail(mailOptionsDeliveryAgent);
+}

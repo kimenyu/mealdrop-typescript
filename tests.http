@@ -1,20 +1,20 @@
 
-# POST http://localhost:3000/api/admin/register
+# POST http://localhost:3000/api/customer/register
 # Content-Type: application/json
 
 # {
-#   "username": "admin",
-#   "email": "mbuguakimenyu@gmail.com",
+#   "username": "kim",
+#   "email": "kimenyujoseph73@gmail.com",
 #   "password": "example_password",
-#   "phoneNum": "+254793058969"
+#   "phoneNum": "+254717794147"
 # }
 
-# POST http://localhost:3000/api/admin/verify
+# POST http://localhost:3000/api/customer/verify
 # Content-Type: application/json
 
 # {
-#   "email": "mbuguakimenyu@gmail.com",
-#   "verificationCode": "10120"
+#   "email": "kimenyujoseph73@gmail.com",
+#   "verificationCode": "15118"
 # }
 
 
@@ -33,30 +33,38 @@
 # DELETE  http://localhost:3000/api/orders/65f35b3c2177f18ef9834476
 
 
-# POST http://localhost:3000/api/order/dispatch/65f3f88b8877e0b444994c72
-
-# GET http://localhost:3000/api/users/my-orders
-
-POST http://localhost:3000/api/order/create
+POST http://localhost:3000/api/order/dispatch
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0OGI0YmU5MWY5MDNmOGY5MzU5MTYiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzEwNTczNjU4NTA0LCJleHAiOjE3MTA1NzQyNjMzMDR9.8OZFfqGo7MuQNWWn6zyg2znU0td4AlWNo_EbCxDycz0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY1NzA3Zjg4MWJiZGY1NDQ4MDNiOTEiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzEwNzA1NzI1MDcyLCJleHAiOjE3MTA3MDYzMjk4NzJ9.JKuRbaFe-_FWejLie8p10EzfTkVb0jVI_XMymAIuU3c
 
 {
-  "meals": [
-    {
-      "meal_id": "65f4c01cbd74a0be2c49bd48",
-      "quantity": 3
-    },
-    {
-      "meal_id": "65f4c19cbd74a0be2c49bd4e",
-      "quantity": 4
-    },
-    {
-      "meal_id": "65f4c1babd74a0be2c49bd51",
-      "quantity": 3
-    }
-  ]
+    "orderId": "65f57106881bbdf544803ba2"
 }
+
+# GET http://localhost:3000/api/users/my-orders
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY1NzA3Zjg4MWJiZGY1NDQ4MDNiOTEiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzEwNjYxMjkyNzY3LCJleHAiOjE3MTA2NjE4OTc1Njd9.dwQdTpjZun-abJ9aw0kg_gtWttL9bfEkRqlmXe9Xf_w
+
+# POST http://localhost:3000/api/order/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY1NzA3Zjg4MWJiZGY1NDQ4MDNiOTEiLCJ1c2VyRW1haWwiOiJraW1lbnl1am9zZXBoNzNAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzEwNTg0MDMwOTUzLCJleHAiOjE3MTA1ODQ2MzU3NTN9.iYOmA5pQ-PYAqzW_6BnW2yO8fxx-5i-CVfVUm4kvLPY
+
+# {
+#   "meals": [
+#     {
+#       "meal_id": "65f4c01cbd74a0be2c49bd48",
+#       "quantity": 5
+#     },
+#     {
+#       "meal_id": "65f4c19cbd74a0be2c49bd4e",
+#       "quantity": 7
+#     },
+#     {
+#       "meal_id": "65f4c1babd74a0be2c49bd51",
+#       "quantity": 8
+#     }
+#   ]
+# }
 
 # GET http://localhost:3000/api/restaurants/65f297841bd4780773511a7e/orders
 

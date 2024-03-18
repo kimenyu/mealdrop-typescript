@@ -3,7 +3,7 @@ import { Document, Schema, model } from 'mongoose';
 export interface Order extends Document {
     customer: Schema.Types.ObjectId;
     meals: {
-        [x: string]: any;
+        [x: string]: unknown;
         populate(arg0: string): unknown;
         meal: Schema.Types.ObjectId;
         quantity: number;

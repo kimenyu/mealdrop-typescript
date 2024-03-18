@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 // import { validationResult } from 'express-validator';
 import Order from '../models/order';
-// import Customer from '../../accounts/models/customer';
+import Customer from '../../accounts/models/customer';
 import Meal from '../../restaurant/models/Meals';
 import jwt from 'jsonwebtoken';
 import Joi from "joi";
@@ -70,14 +70,21 @@ export const createOrder = async (req: Request, res: Response) => {
     });
 
    await order.save();
-   console.log(order);
+   const customer = await Customer.findById(customer_id);
+    if (!customer) {
+      return res.status(404).json({ error: 'Customer not found.' });
+    }
 
-    res.status(201).json({ msg: "Order created successfully", data: order });
+    customer.assignedOrders.push(order._id);
+    await customer.save();
+
+    // Send response
+    res.status(201).json({ msg: 'Order created successfully', data: order });
   } catch (error) {
     console.error(error);
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ error: 'Invalid token' });
     }
-    res.status(500).json({ error: "Something wrong happened" });
+    res.status(500).json({ error: 'Something went wrong.' });
   }
 };

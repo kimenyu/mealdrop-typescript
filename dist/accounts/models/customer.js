@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mongoose_1 = require("mongoose");
 const customerSchema = new mongoose_1.Schema({
     firstname: { type: String },
@@ -17,6 +16,7 @@ const customerSchema = new mongoose_1.Schema({
         latitude: { type: String },
         address: { type: String }
     },
+    assignedOrders: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Order' }], // Reference to Order model
 });
 exports.default = (0, mongoose_1.model)('Customer', customerSchema);
 //# sourceMappingURL=customer.js.map

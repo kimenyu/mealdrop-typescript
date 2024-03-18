@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createOrder = void 0;
 // import { validationResult } from 'express-validator';
 const order_1 = __importDefault(require("../models/order"));
-// import Customer from '../../accounts/models/customer';
+const customer_1 = __importDefault(require("../../accounts/models/customer"));
 const Meals_1 = __importDefault(require("../../restaurant/models/Meals"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const joi_1 = __importDefault(require("joi"));
@@ -64,15 +64,21 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             totalQuantity: total_quantity
         });
         yield order.save();
-        console.log(order);
-        res.status(201).json({ msg: "Order created successfully", data: order });
+        const customer = yield customer_1.default.findById(customer_id);
+        if (!customer) {
+            return res.status(404).json({ error: 'Customer not found.' });
+        }
+        customer.assignedOrders.push(order._id);
+        yield customer.save();
+        // Send response
+        res.status(201).json({ msg: 'Order created successfully', data: order });
     }
     catch (error) {
         console.error(error);
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({ error: 'Invalid token' });
         }
-        res.status(500).json({ error: "Something wrong happened" });
+        res.status(500).json({ error: 'Something went wrong.' });
     }
 });
 exports.createOrder = createOrder;

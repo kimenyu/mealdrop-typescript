@@ -47,7 +47,7 @@ router.post("/order/create", customerAuthMiddleware, createOrder);
 router.delete('/orders/cancel/:orderId', customerAuthMiddleware, cancelOrder);
 router.get('/users/my-orders', customerAuthMiddleware, getUserOrders); //get user orders
 router.put('/order/update/:orderId', customerAuthMiddleware, updateOrder);
-router.post('/order/dispatch/:orderId', dispatchOrder);
+router.post('/order/dispatch', dispatchOrder);
 
 //restaurant orders
 router.get('/restaurants/:restaurantId/orders', getAllOrdersByRestaurant); //fetching orders by restaurant

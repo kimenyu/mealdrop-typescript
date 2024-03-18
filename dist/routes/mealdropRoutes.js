@@ -43,7 +43,7 @@ exports.router.post("/order/create", customerAuthMiddleware_1.customerAuthMiddle
 exports.router.delete('/orders/cancel/:orderId', customerAuthMiddleware_1.customerAuthMiddleware, cancelOrder_1.cancelOrder);
 exports.router.get('/users/my-orders', customerAuthMiddleware_1.customerAuthMiddleware, customerOrdersContoller_1.getUserOrders); //get user orders
 exports.router.put('/order/update/:orderId', customerAuthMiddleware_1.customerAuthMiddleware, updateOrderController_1.updateOrder);
-exports.router.post('/order/dispatch/:orderId', dispatchingOrderController_1.dispatchOrder);
+exports.router.post('/order/dispatch', dispatchingOrderController_1.dispatchOrder);
 //restaurant orders
 exports.router.get('/restaurants/:restaurantId/orders', restaurantOrders_1.getAllOrdersByRestaurant); //fetching orders by restaurant
 exports.default = exports.router;
