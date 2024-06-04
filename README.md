@@ -45,6 +45,3 @@ To run the project locally, follow these steps:
     npm start
     
 ### The project will start running on your local machine, and you can access it at http://localhost:3000.
-
-### Contributing
-Contributions to Meal Drop are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes.
